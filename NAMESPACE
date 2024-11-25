@@ -3,6 +3,7 @@
 export(gen_flux_dev)
 export(gen_flux_pro)
 export(gen_flux_pro1.1)
+export(gen_flux_pro1.1_ultra)
 export(get_result)
 export(get_result_status)
 export(repeat_until)

@@ -249,3 +249,69 @@ gen_flux_dev <- function(
   )
 
 }
+
+
+#' Generate an Image with FLUX 1.1 Pro Ultra
+#'
+#' Submits an image generation task with FLUX 1.1 pro with ultra mode and optional raw mode.
+#'
+#' @inheritParams gen_flux_pro1.1
+#'
+#' @param aspect_ratio Aspect ratio of the image between 21:9 and 9:21. Default is 16:9.
+#' @param raw Generate less processed, more natural-looking images. Default is `FALSE`.
+#' @param image_prompt_strength Blend between the prompt and the image prompt. Number between 0 and 1.
+#'   Default is 0.1.
+#'
+#' @return Either an `httr2` response or request object, or the JSON body of the finished result.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' gen_flux_pro1.1_ultra(
+#'   prompt = "A serene landscape with mountains in the background and a calm lake in the foreground.",
+#'   seed = 1,
+#'   raw = TRUE
+#'  )
+#' }
+gen_flux_pro1.1_ultra <- function(
+    prompt,
+    seed = NULL,
+    aspect_ratio = NULL,
+    saftey_tolerance = NULL,
+    output_format = NULL,
+    raw = NULL,
+    image_prompt = NULL,
+    image_prompt_strength = NULL,
+    output = c("request", "response", "result"),
+    api_key = Sys.getenv("BFL_API_KEY"),
+    follow_url = TRUE,
+    download_path = NULL
+) {
+
+  output <- rlang::arg_match(output)
+
+  url_path <- "https://api.bfl.ml/v1/flux-pro-1.1-ultra"
+
+  params <- list(
+    prompt = prompt,
+    seed = seed,
+    aspect_ratio = aspect_ratio,
+    safety_tolerance = saftey_tolerance,
+    output_format = output_format,
+    raw = raw,
+    image_prompt = image_prompt,
+    image_prompt_strength = image_prompt_strength
+  ) |>
+    purrr::compact()
+
+  util_process_gen_image(
+    url_path = url_path,
+    api_key = api_key,
+    params = params,
+    output = output,
+    download_path = download_path,
+    follow_url = follow_url
+  )
+
+}
+
