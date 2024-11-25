@@ -5,11 +5,16 @@
 #' @param sleep_time Optional amount of seconds to sleep between retries.
 #' @param ... Other arguments passed to func.
 #' @export
-repeat_until <- function(func, expected_result, sleep_time = 1, ...) {
+repeat_until <- function(func, expected_result, failed_result = NULL, sleep_time = 1, timeout = 60,
+                         ...) {
+  time_start <- Sys.time()
   result <- func(...)  # Initial function call
+  if (identical(result, failed_result)) cli::cli_abort("Failed: {result}")
   while (!identical(result, expected_result)) {  # Check if result matches expected
     Sys.sleep(sleep_time)  # Optional: wait for a moment before retrying
     result <- func(...)  # Call the function again
+    elapsed_time <- as.numeric(Sys.time() - time_start)
+    if (elapsed_time > timeout) cli::cli_abort("Timed out in {timeout} seconds")
   }
   return(result)  # Return the expected result
 }

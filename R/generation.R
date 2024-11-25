@@ -21,7 +21,7 @@ util_process_gen_image <- function(url_path, api_key, params, output, download_p
   id <- httr2::resp_body_json(resp)$id
 
   # Poll the 'get-result' endpoint until image is ready
-  repeat_until(\() get_result_status(id), "Ready")
+  repeat_until(\() get_result_status(id), "Ready", failed_result = "Request Moderated")
 
   res <- get_result(id, output = "json")
 
@@ -84,7 +84,7 @@ gen_flux_pro1.1 <- function(
     seed = NULL,
     saftey_tolerance = NULL,
     output_format = NULL,
-    output = c("request", "response", "result"),
+    output = c("result", "response", "request"),
     api_key = Sys.getenv("BFL_API_KEY"),
     follow_url = TRUE,
     download_path = NULL
@@ -152,7 +152,7 @@ gen_flux_pro <- function(
     saftey_tolerance = NULL,
     interval = NULL,
     output_format = NULL,
-    output = c("request", "response", "result"),
+    output = c("result", "response", "request"),
     api_key = Sys.getenv("BFL_API_KEY"),
     follow_url = TRUE,
     download_path = NULL
@@ -217,7 +217,7 @@ gen_flux_dev <- function(
     guidance = NULL,
     saftey_tolerance = NULL,
     output_format = NULL,
-    output = c("request", "response", "result"),
+    output = c("result", "response", "request"),
     api_key = Sys.getenv("BFL_API_KEY"),
     follow_url = TRUE,
     download_path = NULL
@@ -282,7 +282,7 @@ gen_flux_pro1.1_ultra <- function(
     raw = NULL,
     image_prompt = NULL,
     image_prompt_strength = NULL,
-    output = c("request", "response", "result"),
+    output = c("result", "response", "request"),
     api_key = Sys.getenv("BFL_API_KEY"),
     follow_url = TRUE,
     download_path = NULL
@@ -355,7 +355,7 @@ gen_flux_fill_pro1 <- function(
     guidance = NULL,
     output_format = NULL,
     saftey_tolerance = NULL,
-    output = c("request", "response", "result"),
+    output = c("result", "response", "request"),
     api_key = Sys.getenv("BFL_API_KEY"),
     follow_url = TRUE,
     download_path = NULL
@@ -418,7 +418,7 @@ gen_flux_depth_pro1 <- function(
     guidance = NULL,
     output_format = NULL,
     saftey_tolerance = NULL,
-    output = c("request", "response", "result"),
+    output = c("result", "response", "request"),
     api_key = Sys.getenv("BFL_API_KEY"),
     follow_url = TRUE,
     download_path = NULL

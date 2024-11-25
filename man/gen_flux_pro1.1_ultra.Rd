@@ -13,7 +13,7 @@ gen_flux_pro1.1_ultra(
   raw = NULL,
   image_prompt = NULL,
   image_prompt_strength = NULL,
-  output = c("request", "response", "result"),
+  output = c("result", "response", "request"),
   api_key = Sys.getenv("BFL_API_KEY"),
   follow_url = TRUE,
   download_path = NULL

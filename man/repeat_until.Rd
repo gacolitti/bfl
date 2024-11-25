@@ -4,7 +4,14 @@
 \alias{repeat_until}
 \title{Repeat a function until it returns expected value}
 \usage{
-repeat_until(func, expected_result, sleep_time = 1, ...)
+repeat_until(
+  func,
+  expected_result,
+  failed_result = NULL,
+  sleep_time = 1,
+  timeout = 60,
+  ...
+)
 }
 \arguments{
 \item{func}{Function to run.}

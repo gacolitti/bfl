@@ -15,7 +15,7 @@ gen_flux_dev(
   guidance = NULL,
   saftey_tolerance = NULL,
   output_format = NULL,
-  output = c("request", "response", "result"),
+  output = c("result", "response", "request"),
   api_key = Sys.getenv("BFL_API_KEY"),
   follow_url = TRUE,
   download_path = NULL

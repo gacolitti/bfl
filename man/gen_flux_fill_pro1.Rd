@@ -14,7 +14,7 @@ gen_flux_fill_pro1(
   guidance = NULL,
   output_format = NULL,
   saftey_tolerance = NULL,
-  output = c("request", "response", "result"),
+  output = c("result", "response", "request"),
   api_key = Sys.getenv("BFL_API_KEY"),
   follow_url = TRUE,
   download_path = NULL
