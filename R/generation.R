@@ -315,3 +315,139 @@ gen_flux_pro1.1_ultra <- function(
 
 }
 
+
+#' Generate an Image with FLUX 1.0 Fill Pro
+#'
+#' Submits an image generation task with the FLUX.1 Fill pro model using an input image and mask.
+#' Mask can be applied to alpha channel or submitted as a separate image.
+#'
+#' @inheritParams gen_flux_pro
+#'
+#' @param image Required. A Base64-encoded string representing the image you wish to modify. Can
+#'   contain alpha mask if desired.
+#' @param mask A Base64-encoded string representing a mask for the areas you want to modify in the
+#'   image. The mask should be the same dimensions as the image and in black and white. Black areas
+#'   (0%) indicate no modification, while white areas (100%) specify areas for inpainting. Optional
+#'   if you provide an alpha mask in the original image. Validation: The endpoint verifies that the
+#'   dimensions of the mask match the original image.
+#' @param prompt The description of the changes you want to make. This text guides the inpainting process,
+#'   allowing you to specify features, styles, or modifications for the masked area.
+#'
+#' @return Either an `httr2` response or request object, or the JSON body of the finished result.
+#' @export
+#'
+#' @examples
+#' TODO:
+#' \dontrun{
+#' gen_flux_fill_pro1(
+#'   image =
+#'   prompt = "A serene landscape with mountains in the background and a calm lake in the foreground.",
+#'   seed = 1
+#'  )
+#' }
+gen_flux_fill_pro1 <- function(
+    image,
+    mask = NULL,
+    prompt = NULL,
+    steps = NULL,
+    prompt_upsampling = NULL,
+    seed = NULL,
+    guidance = NULL,
+    output_format = NULL,
+    saftey_tolerance = NULL,
+    output = c("request", "response", "result"),
+    api_key = Sys.getenv("BFL_API_KEY"),
+    follow_url = TRUE,
+    download_path = NULL
+) {
+
+  output <- rlang::arg_match(output)
+
+  url_path <- "https://api.bfl.ml/v1/flux-pro-1.0-fill"
+
+  params <- list(
+    image = image,
+    mask = mask,
+    prompt = prompt,
+    steps = steps,
+    prompt_upsampling = prompt_upsampling,
+    seed = seed,
+    guidance = guidance,
+    output_format = output_format,
+    safety_tolerance = saftey_tolerance
+  ) |>
+    purrr::compact()
+
+  util_process_gen_image(
+    url_path = url_path,
+    api_key = api_key,
+    params = params,
+    output = output,
+    download_path = download_path,
+    follow_url = follow_url
+  )
+
+}
+
+#' Generate an image with FLUX.1 Depth pro using a control image.
+#'
+#' Submits an image generation task with FLUX.1 Depth pro.
+#'
+#' @inheritParams gen_flux_pro
+#'
+#' @param control_image Required. Base64 encoded image to use as control input.
+#'
+#' @return Either an `httr2` response or request object, or the JSON body of the finished result.
+#' @export
+#'
+#' @examples
+#' TODO:
+#' \dontrun{
+#' gen_flux_depth_pro1(
+#'   control_image =
+#'   prompt = "A serene landscape with mountains in the background and a calm lake in the foreground.",
+#'   seed = 1
+#'  )
+#' }
+gen_flux_depth_pro1 <- function(
+    control_image,
+    prompt = NULL,
+    steps = NULL,
+    prompt_upsampling = NULL,
+    seed = NULL,
+    guidance = NULL,
+    output_format = NULL,
+    saftey_tolerance = NULL,
+    output = c("request", "response", "result"),
+    api_key = Sys.getenv("BFL_API_KEY"),
+    follow_url = TRUE,
+    download_path = NULL
+) {
+
+  output <- rlang::arg_match(output)
+
+  url_path <- "https://api.bfl.ml/v1/flux-pro-1.0-depth"
+
+  params <- list(
+    control_image = control_image,
+    prompt = prompt,
+    steps = steps,
+    prompt_upsampling = prompt_upsampling,
+    seed = seed,
+    guidance = guidance,
+    output_format = output_format,
+    safety_tolerance = saftey_tolerance
+  ) |>
+    purrr::compact()
+
+  util_process_gen_image(
+    url_path = url_path,
+    api_key = api_key,
+    params = params,
+    output = output,
+    download_path = download_path,
+    follow_url = follow_url
+  )
+
+}
+
