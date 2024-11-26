@@ -332,6 +332,7 @@ gen_flux_pro1.1_ultra <- function(
 #'   dimensions of the mask match the original image.
 #' @param prompt The description of the changes you want to make. This text guides the inpainting process,
 #'   allowing you to specify features, styles, or modifications for the masked area.
+#' @param guidance Guidance strength for the image generation process. Number between 1.5 and 100.
 #'
 #' @return Either an `httr2` response or request object, or the JSON body of the finished result.
 #' @export
@@ -401,6 +402,7 @@ gen_flux_fill_pro1 <- function(
 #' @inheritParams gen_flux_pro
 #'
 #' @param control_image Required. Base64 encoded image to use as control input.
+#' @param guidance Guidance strength for the image generation process. Number between 1 and 100.
 #'
 #' @return Either an `httr2` response or request object, or the JSON body of the finished result.
 #' @export

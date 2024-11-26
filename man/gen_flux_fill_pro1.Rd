@@ -40,8 +40,7 @@ Default is FALSE.}
 
 \item{seed}{An optional seed for reproducibility of the generated image. Default is NULL.}
 
-\item{guidance}{Guidance scale for image generation. High guidance scales improve prompt
-adherence at the cost of reduced realism. Number between 1.5 and 5.}
+\item{guidance}{Guidance strength for the image generation process. Number between 1.5 and 100.}
 
 \item{output_format}{A character string specifying the output format of the generated image. Can
 be 'jpeg' or 'png'. Default is NULL.}
