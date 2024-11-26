@@ -52,12 +52,18 @@ Either an \code{httr2} response or request object, or the JSON body of the finis
 Submits an image generation task with FLUX.1 Canny pro.
 }
 \examples{
-TODO:
 \dontrun{
-gen_flux_depth_pro1(
-  control_image =
-  prompt = "A serene landscape with mountains in the background and a calm lake in the foreground.",
-  seed = 1
+ control_image <- base64enc::base64encode(system.file("/images/IMG_2709.jpeg"))
+ bfl::gen_flux_canny_pro1(
+   control_image = control_image,
+   prompt = paste0(
+     "small humanoid creature with pink hair gently grasped by a human thumb and three fingers, ",
+     "mars desert and sand dunes in the background, ultrarealistic, detailed"
+   ),
+   seed = 2,
+   steps = 50,
+   prompt_upsampling = TRUE,
+   download_path = paste0("flux-canny-img_", Sys.time(), ".jpg")
  )
 }
 }

@@ -9,8 +9,8 @@ repeat_until <- function(func, expected_result, failed_result = NULL, sleep_time
                          ...) {
   time_start <- Sys.time()
   result <- func(...)  # Initial function call
-  if (identical(result, failed_result)) cli::cli_abort("Failed: {result}")
   while (!identical(result, expected_result)) {  # Check if result matches expected
+    if (grepl(failed_result, result)) cli::cli_abort("Failed: {result}")
     Sys.sleep(sleep_time)  # Optional: wait for a moment before retrying
     result <- func(...)  # Call the function again
     elapsed_time <- as.numeric(Sys.time() - time_start)

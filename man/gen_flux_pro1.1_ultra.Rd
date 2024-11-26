@@ -54,10 +54,10 @@ Submits an image generation task with FLUX 1.1 pro with ultra mode and optional 
 }
 \examples{
 \dontrun{
-gen_flux_pro1.1_ultra(
-  prompt = "A serene landscape with mountains in the background and a calm lake in the foreground.",
-  seed = 1,
-  raw = TRUE
- )
+  gen_flux_pro1.1_ultra(
+    prompt = "A serene landscape with mountains in the background and a calm lake in the foreground.",
+    seed = 1,
+    raw = TRUE
+   )
 }
 }

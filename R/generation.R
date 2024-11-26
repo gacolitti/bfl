@@ -21,7 +21,7 @@ util_process_gen_image <- function(url_path, api_key, params, output, download_p
   id <- httr2::resp_body_json(resp)$id
 
   # Poll the 'get-result' endpoint until image is ready
-  repeat_until(\() get_result_status(id), "Ready", failed_result = "Request Moderated")
+  repeat_until(\() get_result_status(id), "Ready", failed_result = "Moderated")
 
   res <- get_result(id, output = "json")
 
@@ -70,10 +70,10 @@ util_process_gen_image <- function(url_path, api_key, params, output, download_p
 #'
 #' @examples
 #' \dontrun{
-#' gen_flux_pro1.1(
-#'   prompt = "A serene landscape with mountains in the background and a calm lake in the foreground.",
-#'   seed = 1
-#'  )
+#'   gen_flux_pro1.1(
+#'     prompt = "A serene landscape with mountains in the background and a calm lake in the foreground.",
+#'     seed = 1
+#'    )
 #' }
 gen_flux_pro1.1 <- function(
     prompt,
@@ -135,10 +135,10 @@ gen_flux_pro1.1 <- function(
 #'
 #' @examples
 #' \dontrun{
-#' gen_flux_pro(
-#'   prompt = "A serene landscape with mountains in the background and a calm lake in the foreground.",
-#'   seed = 1
-#'  )
+#'   gen_flux_pro(
+#'     prompt = "A serene landscape with mountains in the background and a calm lake in the foreground.",
+#'     seed = 1
+#'    )
 #' }
 gen_flux_pro <- function(
     prompt,
@@ -201,10 +201,10 @@ gen_flux_pro <- function(
 #'
 #' @examples
 #' \dontrun{
-#' gen_flux_dev(
-#'   prompt = "A serene landscape with mountains in the background and a calm lake in the foreground.",
-#'   seed = 1
-#'  )
+#'   gen_flux_dev(
+#'     prompt = "A serene landscape with mountains in the background and a calm lake in the foreground.",
+#'     seed = 1
+#'    )
 #' }
 gen_flux_dev <- function(
     prompt,

@@ -61,9 +61,9 @@ image dimensions, and other options like upsampling, seed, and output format.
 }
 \examples{
 \dontrun{
-gen_flux_pro1.1(
-  prompt = "A serene landscape with mountains in the background and a calm lake in the foreground.",
-  seed = 1
- )
+  gen_flux_pro1.1(
+    prompt = "A serene landscape with mountains in the background and a calm lake in the foreground.",
+    seed = 1
+   )
 }
 }
