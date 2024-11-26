@@ -15,7 +15,7 @@ gen_flux_pro1.1_ultra(
   image_prompt_strength = NULL,
   output = c("result", "response", "request"),
   api_key = Sys.getenv("BFL_API_KEY"),
-  follow_url = TRUE,
+  open_with = "magick",
   download_path = NULL
 )
 }
@@ -40,8 +40,8 @@ Default is 0.1.}
 
 \item{output}{Determines whether the function returns the request, response, or result. If}
 
-\item{follow_url}{Logical. If \code{TRUE} and output = 'result', then the generated image will in your
-browser.}
+\item{open_with}{Either 'none', 'browser', or 'magick'. Will look for \code{bfl_open_with} option
+and default to 'magick' if not found.}
 
 \item{download_path}{If \code{TRUE} and output = 'result', then passing a path to this argument will
 download the file to that specified path.}

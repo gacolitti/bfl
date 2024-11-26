@@ -1,6 +1,7 @@
 
 #' @keywords internal
-util_process_gen_image <- function(url_path, api_key, params, output, download_path, follow_url) {
+util_process_gen_image <- function(url_path, api_key, params, output, download_path,
+                                   open_with) {
   req <- httr2::request(
     url_path
   ) |>
@@ -25,9 +26,11 @@ util_process_gen_image <- function(url_path, api_key, params, output, download_p
 
   res <- get_result(id, output = "json")
 
-  if (follow_url) {
-    sample_url <- res$result$sample
+  sample_url <- res$result$sample
+  if (open_with == "browser") {
     browseURL(sample_url)
+  } else if (open_with == "magick") {
+    print(magick::image_read(sample_url))
   }
 
   if (!is.null(download_path)) {
@@ -60,8 +63,8 @@ util_process_gen_image <- function(url_path, api_key, params, output, download_p
 #' @param output_format A character string specifying the output format of the generated image. Can
 #'   be 'jpeg' or 'png'. Default is NULL.
 #' @param output Determines whether the function returns the request, response, or result. If
-#' @param follow_url Logical. If `TRUE` and output = 'result', then the generated image will in your
-#'  browser.
+#' @param open_with Either 'none', 'browser', or 'magick'. Will look for `bfl_open_with` option
+#'   and default to 'magick' if not found.
 #' @param download_path If `TRUE` and output = 'result', then passing a path to this argument will
 #'   download the file to that specified path.
 #'
@@ -86,7 +89,7 @@ gen_flux_pro1.1 <- function(
     output_format = NULL,
     output = c("result", "response", "request"),
     api_key = Sys.getenv("BFL_API_KEY"),
-    follow_url = TRUE,
+    open_with = getOption("bfl_open_with", default = "magick"),
     download_path = NULL
 ) {
 
@@ -112,7 +115,7 @@ gen_flux_pro1.1 <- function(
     params = params,
     output = output,
     download_path = download_path,
-    follow_url = follow_url
+    open_with = open_with
   )
 
 }
@@ -154,7 +157,7 @@ gen_flux_pro <- function(
     output_format = NULL,
     output = c("result", "response", "request"),
     api_key = Sys.getenv("BFL_API_KEY"),
-    follow_url = TRUE,
+    open_with = "magick",
     download_path = NULL
 ) {
 
@@ -182,7 +185,7 @@ gen_flux_pro <- function(
     params = params,
     output = output,
     download_path = download_path,
-    follow_url = follow_url
+    open_with = open_with
   )
 
 }
@@ -219,7 +222,7 @@ gen_flux_dev <- function(
     output_format = NULL,
     output = c("result", "response", "request"),
     api_key = Sys.getenv("BFL_API_KEY"),
-    follow_url = TRUE,
+    open_with = "magick",
     download_path = NULL
 ) {
 
@@ -245,7 +248,7 @@ gen_flux_dev <- function(
     params = params,
     output = output,
     download_path = download_path,
-    follow_url = follow_url
+    open_with = open_with
   )
 
 }
@@ -284,7 +287,7 @@ gen_flux_pro1.1_ultra <- function(
     image_prompt_strength = NULL,
     output = c("result", "response", "request"),
     api_key = Sys.getenv("BFL_API_KEY"),
-    follow_url = TRUE,
+    open_with = "magick",
     download_path = NULL
 ) {
 
@@ -310,7 +313,7 @@ gen_flux_pro1.1_ultra <- function(
     params = params,
     output = output,
     download_path = download_path,
-    follow_url = follow_url
+    open_with = open_with
   )
 
 }
@@ -363,7 +366,7 @@ gen_flux_fill_pro1 <- function(
     saftey_tolerance = NULL,
     output = c("result", "response", "request"),
     api_key = Sys.getenv("BFL_API_KEY"),
-    follow_url = TRUE,
+    open_with = "magick",
     download_path = NULL
 ) {
 
@@ -390,7 +393,7 @@ gen_flux_fill_pro1 <- function(
     params = params,
     output = output,
     download_path = download_path,
-    follow_url = follow_url
+    open_with = open_with
   )
 
 }
@@ -433,7 +436,7 @@ gen_flux_canny_pro1 <- function(
     saftey_tolerance = NULL,
     output = c("result", "response", "request"),
     api_key = Sys.getenv("BFL_API_KEY"),
-    follow_url = TRUE,
+    open_with = "magick",
     download_path = NULL
 ) {
 
@@ -459,7 +462,7 @@ gen_flux_canny_pro1 <- function(
     params = params,
     output = output,
     download_path = download_path,
-    follow_url = follow_url
+    open_with = open_with
   )
 
 }
@@ -500,7 +503,7 @@ gen_flux_depth_pro1 <- function(
     saftey_tolerance = NULL,
     output = c("result", "response", "request"),
     api_key = Sys.getenv("BFL_API_KEY"),
-    follow_url = TRUE,
+    open_with = "magick",
     download_path = NULL
 ) {
 
@@ -526,7 +529,7 @@ gen_flux_depth_pro1 <- function(
     params = params,
     output = output,
     download_path = download_path,
-    follow_url = follow_url
+    open_with = open_with
   )
 
 }
