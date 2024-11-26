@@ -62,12 +62,17 @@ Submits an image generation task with the FLUX.1 Fill pro model using an input i
 Mask can be applied to alpha channel or submitted as a separate image.
 }
 \examples{
-TODO:
 \dontrun{
+mask <- base64enc::base64encode(system.file("/images/IMG_3130_mask.jpeg", package = "bfl"))
+image <- base64enc::base64encode(system.file("/images/IMG_3130.jpeg", package = "bfl"))
 gen_flux_fill_pro1(
-  image =
-  prompt = "A serene landscape with mountains in the background and a calm lake in the foreground.",
-  seed = 1
- )
+image = image,
+  mask = mask,
+  prompt = "alien spaceship, ultrarealistic, detailed",
+  seed = 200,
+  steps = 50,
+  prompt_upsampling = TRUE,
+  download_path = paste0(Sys.time(), ".jpg")
+)
 }
 }
