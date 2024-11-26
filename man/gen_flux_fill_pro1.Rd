@@ -62,8 +62,8 @@ Mask can be applied to alpha channel or submitted as a separate image.
 }
 \examples{
 \dontrun{
-  mask <- base64enc::base64encode(system.file("/images/IMG_3130_mask.jpeg", package = "bfl"))
-  image <- base64enc::base64encode(system.file("/images/IMG_3130.jpeg", package = "bfl"))
+  mask <- base64enc::base64encode(system.file("/images/backyard-original_mask.jpeg", package = "bfl"))
+  image <- base64enc::base64encode(system.file("/images/backyard-original.jpeg", package = "bfl"))
   bfl::gen_flux_fill_pro1(
     image = image,
     mask = mask,

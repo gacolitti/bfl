@@ -54,7 +54,7 @@ Submits an image generation task with FLUX.1 Depth pro.
 \examples{
 TODO:
 \dontrun{
- control_image <- base64enc::base64encode(system.file("/images/IMG_2709.jpeg"))
+ control_image <- base64enc::base64encode(system.file("/images/low-res-pink-hair-figurine.jpeg"))
  bfl::gen_flux_depth_pro1(
    control_image = control_image,
    prompt = paste0(
