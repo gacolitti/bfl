@@ -1,6 +1,6 @@
 Package: bfl
 Title: Black Forest Labs API Wrapper in R
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     person("Giovanni", "Colitti", , "g.a.colitti@gmail.com", role = c("aut", "cre"))
 Description: Generate images with FLUX models and tools using the Black Forest Labs API in R.
