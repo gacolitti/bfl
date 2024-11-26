@@ -138,7 +138,7 @@ output <- image_read(res$result$sample)
 images_edited <- purrr::imap(
   list(
     "Original" = original, 
-    "FLUX Fill Output" = output
+    "FLUX Depth Output" = output
   ),
   ~ image_annotate(
       .x,
