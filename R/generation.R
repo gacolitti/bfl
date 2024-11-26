@@ -394,13 +394,73 @@ gen_flux_fill_pro1 <- function(
 
 }
 
-#' Generate an image with FLUX.1 Depth pro using a control image.
+#' Generate an image with FLUX.1 Canny pro using a control image
 #'
-#' Submits an image generation task with FLUX.1 Depth pro.
+#' Submits an image generation task with FLUX.1 Canny pro.
 #'
 #' @inheritParams gen_flux_pro
 #'
 #' @param control_image Required. Base64 encoded image to use as control input.
+#'
+#' @return Either an `httr2` response or request object, or the JSON body of the finished result.
+#' @export
+#'
+#' @examples
+#' TODO:
+#' \dontrun{
+#' gen_flux_depth_pro1(
+#'   control_image =
+#'   prompt = "A serene landscape with mountains in the background and a calm lake in the foreground.",
+#'   seed = 1
+#'  )
+#' }
+gen_flux_canny_pro1 <- function(
+    control_image,
+    prompt = NULL,
+    steps = NULL,
+    prompt_upsampling = NULL,
+    seed = NULL,
+    guidance = NULL,
+    output_format = NULL,
+    saftey_tolerance = NULL,
+    output = c("result", "response", "request"),
+    api_key = Sys.getenv("BFL_API_KEY"),
+    follow_url = TRUE,
+    download_path = NULL
+) {
+
+  output <- rlang::arg_match(output)
+
+  url_path <- "https://api.bfl.ml/v1/flux-pro-1.0-canny"
+
+  params <- list(
+    control_image = control_image,
+    prompt = prompt,
+    steps = steps,
+    prompt_upsampling = prompt_upsampling,
+    seed = seed,
+    guidance = guidance,
+    output_format = output_format,
+    safety_tolerance = saftey_tolerance
+  ) |>
+    purrr::compact()
+
+  util_process_gen_image(
+    url_path = url_path,
+    api_key = api_key,
+    params = params,
+    output = output,
+    download_path = download_path,
+    follow_url = follow_url
+  )
+
+}
+
+#' Generate an image with FLUX.1 Depth pro using a control image.
+#'
+#' Submits an image generation task with FLUX.1 Depth pro.
+#'
+#' @inheritParams gen_flux_canny_pro1
 #'
 #' @return Either an `httr2` response or request object, or the JSON body of the finished result.
 #' @export
